@@ -1,38 +1,19 @@
+import React from 'react'
+import { Container, Header } from "semantic-ui-react";
+import CartIcon from "./CartIcon";
 
-import React, { Component } from 'react'
-import { Input, Menu, Segment } from 'semantic-ui-react'
-import ProductList from "../api/ProductList";
 
-export default class MenuExamplePointing extends Component {
-  state = { activeItem: 'home' }
+// import ProductList from "../api/ProductList";
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
-  render() {
-    const { activeItem } = this.state
+const App = ({ children }) => (
+    <Container style={{ margin: 10 }}>
+        <Header as="h4">E-Commerce Store
+                <CartIcon />
+        </Header>
 
-    return (
-        <div>
-          <Menu pointing>
-            <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
-            <Menu.Item
-                name='messages'
-                active={activeItem === 'messages'}
-                onClick={this.handleItemClick}
-            />
-            <Menu.Item
-                name='friends'
-                active={activeItem === 'friends'}
-                onClick={this.handleItemClick}
-            />
-            <Menu.Menu position='right'>
-              <Menu.Item>
-                <Input icon='search' placeholder='Search...' />
-              </Menu.Item>
-            </Menu.Menu>
-          </Menu>
+        {children}
+    </Container>
+);
 
-        </div>
-    )
-  }
-}
+export default App

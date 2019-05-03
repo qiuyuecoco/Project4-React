@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Input, Menu, Segment } from 'semantic-ui-react'
-import ProductList from "./App";
+// import Products from "./Products";
+// import ProductList from "../api/ProductList";
 
-export default class Navigation extends Component {
+export default class Nav extends Component {
     state = { activeItem: 'products' };
 
     handleItemClick = (e, { name }) => this.setState({ activeItem: name });
@@ -14,18 +15,21 @@ export default class Navigation extends Component {
             <div>
                 <Menu pointing>
                     <Menu.Item
+                        color = 'purple'
                         name='products'
                         active={activeItem === 'products'}
                         onClick={this.handleItemClick}
                     />
                     <Menu.Item
-                        name='cart'
-                        active={activeItem === 'cart'}
+                        color = 'blue'
+                        name='categories'
+                        active={activeItem === 'categories'}
                         onClick={this.handleItemClick}
                     />
                     <Menu.Item
-                        name='messages'
-                        active={activeItem === 'messages'}
+                        color = 'green'
+                        name='cart'
+                        active={activeItem === 'cart'}
                         onClick={this.handleItemClick}
                     />
                     <Menu.Menu position='right'>
@@ -36,8 +40,7 @@ export default class Navigation extends Component {
                 </Menu>
 
                 <Segment>
-                    <ProductList />
-
+                    {/*<ProductList />*/}
                 </Segment>
             </div>
         )

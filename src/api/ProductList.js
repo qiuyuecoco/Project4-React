@@ -1,5 +1,5 @@
-import React from "react";
-
+// import React, { Component } from 'react'
+import React from "react"
 
 class ProductList extends React.Component {
     constructor(props) {
@@ -12,15 +12,18 @@ class ProductList extends React.Component {
     }
 
     componentDidMount() {
-        fetch("https://my-json-server.typicode.com/tdmichaelis/json-api/products")
+        fetch("https://my-json-server.typicode.com/tdmichaelis/json-api/db")
             .then(res => res.json())
             .then(
                 (result) => {
                     this.setState({
                         isLoaded: true,
-                        products: result.items
+                        products: result.products
                     });
                 },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
                 (error) => {
                     this.setState({
                         isLoaded: true,
@@ -31,7 +34,7 @@ class ProductList extends React.Component {
     }
 
     render() {
-        const { error, isLoaded, product } = this.state;
+        const { error, isLoaded, products } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -39,9 +42,9 @@ class ProductList extends React.Component {
         } else {
             return (
                 <ul>
-                    {product.map(item => (
-                        <li key={product.title}>
-                            {product.img} {product.description} {product.price} {product.rating}
+                    {products.map(products => (
+                        <li key={products.title}>
+                            {products.img} {product.description} {product.price} {product.rating}
                         </li>
                     ))}
                 </ul>
@@ -51,6 +54,57 @@ class ProductList extends React.Component {
 }
 
 export default ProductList
+
+
+// export default class ProductList extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             error: null,
+//             isLoaded: false,
+//             products: []
+//         };
+//     }
+//
+//     componentDidMount() {
+//         fetch("https://my-json-server.typicode.com/tdmichaelis/json-api/db")
+//             .then(res => res.json())
+//             .then(
+//                 (result) => {
+//                     this.setState({
+//                         isLoaded: true,
+//                         products: result.id
+//                     });
+//                 },
+//                 (error) => {
+//                     this.setState({
+//                         isLoaded: true,
+//                         error
+//                     });
+//                 }
+//             )
+//     }
+//
+//     render() {
+//         const { error, isLoaded, product } = this.state;
+//         if (error) {
+//             return <div>Error: {error.message}</div>;
+//         } else if (!isLoaded) {
+//             return <div>Loading...</div>;
+//         } else {
+//             return (
+//                 <ul>
+//                     {product.map(product => (
+//                         <li key={product.title}>
+//                             {product.img} {product.description} {product.price} {product.rating}
+//                         </li>
+//                     ))}
+//                 </ul>
+//             );
+//         }
+//     }
+// }
+
 
 // import React from 'react';
 // import axios from "axios";
